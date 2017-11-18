@@ -1,0 +1,31 @@
+<div id="modal-edit-book" class="modal fade book-edit">
+  <div class="modal-dialog">
+    <form class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h2 class="modal-title">Edit a Book</h2>
+      </div>
+      <div class="modal-body">
+        <ul class="list-unstyled">
+          <li class="form-group">
+            <label>Title</label>
+            <input id="title" name="title"
+              class="form-control" type="text"
+              value="{{title}}" />
+          </li>
+          <li class="form-group">
+            <label>Author</label>
+            <input id="author" name="author"
+              class="form-control" type="text"
+              value="{{author}}" />
+          </li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <input type="hidden" id="id" name="id" value="{{id}}" />
+        <input class="btn-save-book btn btn-success" type="submit" value="Save" />
+        <input class="btn-cancel btn btn-warning" type="button" value="Cancel" data-dismiss="modal" />
+      </div>
+    </form>
+  </div>
+</div>

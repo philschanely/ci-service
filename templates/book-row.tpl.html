@@ -1,0 +1,14 @@
+<tr id="book-{{id}}" class="book {{#if checkedOut}}warning{{/if}}" data-bookId="{{id}}">
+  <td><a class="link-edit-book" href="#">{{title}}</a></td>
+  <td>{{author}}</td>
+  <td>
+    {{#if checkedOut}}
+      <button class="btn btn-sm btn-success btn-check-in">Check in</button>
+    {{else}}
+      <button class="btn btn-sm btn-warning btn-check-out">Check out</button>
+    {{/if}}
+  </td>
+  <td>
+    <button class="btn btn-sm btn-danger btn-delete-book">Remove book</button>
+  </td>
+</tr>

@@ -1,0 +1,18 @@
+<div class="modal fade book-delete">
+  <div class="modal-dialogue">
+    <form class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h2 class="modal-title">Delete a Book</h2>
+      </div>
+      <div class="modal-body">
+        <p>This action will permanently delete this book from your database. Are you sure you want to do this?</p>
+      </div>
+      <div class="modal-footer">
+        <input type="hidden" id="id" name="id" value="{{id}}" />
+        <input class="btn-confirm-delete-book btn btn-danger" type="submit" value="Yes" />
+        <input class="btn-cancel btn btn-warning" type="button" value="Cancel" data-dismiss="modal" />
+      </div>
+    </form>
+  </div>
+</div>

@@ -5,9 +5,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <head>
 	<meta charset="utf-8">
 	<title>CI-Service Test Page</title>
-	<link type="text/css" rel="stylesheet" href="css/litera-bootswatch.css" />
+	<link type="text/css" rel="stylesheet" href="css/lumen-bootswatch.css" />
 	<style>
-
+		header { margin-top: 20px; }
+		.options { margin-top: 20px; }
 	</style>
 </head>
 <body class="container">
@@ -18,16 +19,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<button class="btn btn-success btn-add-book">Add a book</button>
 		</div>
 	</header>
-
-	<div id="books" class="row"></div>
-
-	<div id="modals"></div>
+	<div id="books" class="row">
+		<p>No books found</p>
+	</div>
 
 	<script src="js/vendor/jquery-3.2.1.min.js"></script>
 	<script src="js/vendor/lodash.js"></script>
 	<script src="js/vendor/bootstrap.min.js"></script>
 	<script src="js/vendor/handlebars-v4.0.5.js"></script>
-	<script src="js/vendor/md5.min.js"></script>
 	<script src="js/app.js"></script>
 
 </body>
