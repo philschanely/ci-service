@@ -50,10 +50,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 $route['default_controller'] = 'welcome';
-$route['task/(:any)'] = 'task/index/$1';
-$route['task_type/(:any)'] = 'task_type/index/$1';
-$route['user/(:any)'] = 'user/index/$1';
-$route['category/(:any)'] = 'category/index/$1';
-$route['auth_user/(:any)'] = 'auth_user/index/$1';
+$route['book/(:any)'] = 'book/index/$1';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

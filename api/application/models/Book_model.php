@@ -9,7 +9,7 @@ require_once 'application/libraries/Service.php';
  * Time: 2:56 PM
  */
 
-class User_model extends CI_Model {
+class Book_model extends CI_Model {
 
     var $entity;
     var $key;
@@ -24,21 +24,19 @@ class User_model extends CI_Model {
         parent::__construct();
         $this->load->database();
 
-        $this->entity = 'User';
-        $this->plural = 'users';
-        $this->single = 'user';
+        $this->entity = 'Book';
+        $this->plural = 'books';
+        $this->single = 'book';
         $this->key = 'id';
         $this->properties = array(
             'id',
-            'name',
-            'email'
+            'title',
+            'author',
+            'checkedOut'
         );
         $this->belongs_to = array();
         $this->has_one = array();
-        $this->has_many = array(
-            'owner' => 'Task',
-            'owner' => 'Category'
-        );
+        $this->has_many = array();
 
         $this->service = new Service(array(
             'entity' => $this->entity,

@@ -12,13 +12,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </head>
 <body class="container">
 
-	<h1>Task Manager</h1>
+	<header class="row">
+		<h1 class="col-md-10">Book Manager</h1>
+		<div class="options  col-md-2">
+			<button class="btn btn-success btn-add-book">Add a book</button>
+		</div>
+	</header>
 
-	<div id="tasks" class="row"></div>
+	<div id="books" class="row"></div>
 
-	<pre class="well"></pre>
+	<div id="modals"></div>
 
 	<script src="js/vendor/jquery-3.2.1.min.js"></script>
+	<script src="js/vendor/lodash.js"></script>
 	<script src="js/vendor/bootstrap.min.js"></script>
 	<script src="js/vendor/handlebars-v4.0.5.js"></script>
 	<script src="js/vendor/md5.min.js"></script>

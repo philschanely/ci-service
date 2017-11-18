@@ -39,23 +39,19 @@ $(function(){
     //   }
     // });
 
-    $.ajax(api + 'task', {
+    $.ajax(api + 'book', {
       type: "GET",
-      data: {
-        filter: "owner=" + current_user
-      },
+      data: {},
       success: function(data){
         var result = $.parseJSON(data);
-        console.log(result);
-        $.get("templates/task.tpl.html", function(tpl){
-          var taskTpl = Handlebars.compile(tpl);
-          $(result.tasks).each(function(i,o){
-            var taskHTML = taskTpl(o);
-            $("#tasks").append(taskHTML);
-          });
-
+        _.each(result.books, function(obj){
+          obj.checkedOut = obj.checkedOut == "1" ? true : false;
         });
-
+        $.get("templates/book-list.tpl.html", function(tpl){
+          var booksTpl = Handlebars.compile(tpl);
+          var booksHTML = booksTpl(result);
+          $("#books").append(booksHTML);
+        });
       }
     });
 
