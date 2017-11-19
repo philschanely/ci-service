@@ -4,8 +4,8 @@ Development repo for a service model system for PHP/MySQL using CodeIgniter
 
 ## Install sample data
 
-From terminal run the following command (assuming you have first created a database called `lego_collection`):
+From terminal run the following command to import the database for this application:
 
 ```
-$ mysql lego_collection < sample-data.sql
+$ mysql < book-db.sql
 ```
