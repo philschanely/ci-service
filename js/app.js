@@ -47,6 +47,10 @@ function serializeData($form) {
   return data;
 }
 
+function getBookIdFromRow($start) {
+  return $start.closest('.book').attr('data-bookId');
+}
+
 function addBook(data) {
   $.ajax(api + 'book/', {
     type: "POST",
@@ -88,6 +92,7 @@ function deleteBook(bookId) {
     success: function(data) {
       var bookIdStr = '#book-' + bookId;
       $(bookIdStr).remove();
+      $('#modal-delete-book').modal('hide');
     }
   });
 }
@@ -124,7 +129,7 @@ function handleEditBookClick(e){
 
   $("#modal-edit-book").remove();
 
-  var bookId = $(e.target).closest('.book').attr('data-bookId');
+  var bookId = getBookIdFromRow($(e.target));
   getBook(bookId);
 }
 
@@ -145,46 +150,53 @@ function handleSaveBookClick(e){
 
 function handleCheckinBookClick(e){
   e.preventDefault();
-  console.log("Check in book");
+  var bookId = getBookIdFromRow($(e.target));
+  updateBook(bookId, { checkedOut: 0 });
 }
 
 function handleCheckoutBookClick(e){
   e.preventDefault();
-  console.log("Check out book");
+  var bookId = getBookIdFromRow($(e.target));
+  updateBook(bookId, { checkedOut: 1 });
 }
 
 function handleDeleteBookClick(e){
   e.preventDefault();
-  console.log("Delete book");
+
+  $('#modal-delete-book').remove();
+
+  var book = {
+    id: getBookIdFromRow($(e.target))
+  };
+  var deleteBookModalHTML = modalDeleteBookTpl(book);
+  $('body').append(deleteBookModalHTML);
+  $('#modal-delete-book').modal('show');
 }
 
 function handleConfirmDeleteBookClick(e){
   e.preventDefault();
-  console.log("Confirm delete book");
+
+  var $form = $(e.target).closest('form');
+  var formData = serializeData($form);
+  deleteBook(formData.id);
 }
 
+
 // ----------------------------------
-// Responders
+// DRE and Responders
 // ----------------------------------
 
 $(function(){
 
     preloadTemplates();
-
     getAllBooks();
 
     $(document).on("click", ".btn-add-book", handleAddBookClick);
-
     $(document).on("click", ".link-edit-book", handleEditBookClick);
-
     $(document).on("click", ".btn-save-book", handleSaveBookClick);
-
     $(document).on("click", ".btn-check-in", handleCheckinBookClick);
-
     $(document).on("click", ".btn-check-out", handleCheckoutBookClick);
-
     $(document).on("click", ".btn-delete-book", handleDeleteBookClick);
-
     $(document).on("click", ".btn-confirm-delete-book", handleConfirmDeleteBookClick);
 
 });
