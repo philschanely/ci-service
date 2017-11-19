@@ -97,9 +97,12 @@ function updateBook(bookId, data) {
     type: "PUT",
     data: data,
     success: function(data) {
+      console.log(data);
+      var result = $.parseJSON(data);
+      result.checkedOut = result.checkedOut == "1" ? true : false;
       var bookIdStr = '#book-' + bookId;
-      var bookHTML = bookRowTpl(data);
-      $(bookIdStr).replace(bookHTML);
+      var bookHTML = bookRowTpl(result);
+      $(bookIdStr).replaceWith(bookHTML);
     }
   });
 }
@@ -131,8 +134,10 @@ function handleSaveBookClick(e){
   var $form = $(e.target).closest('form');
   var formData = serializeData($form);
 
+  $('#modal-edit-book').modal('hide');
+
   if (formData.id > 0) {
-    updateBook(fomData.id, formData);
+    updateBook(formData.id, formData);
   } else {
     addBook(formData);
   }
