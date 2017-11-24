@@ -179,11 +179,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <pre>{
   "tasks": [
     {
-      "owner": {
-        "id": 1,
-        "name": "Phil Schanely",
-        "email": philschanely@example.com"
-      },
+			"id": 1,
       "description": "Finish homework",
       "dueDate": "2017-12-01",
       "category": {
@@ -203,11 +199,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 }</pre>
 <strong>GET a single task</strong>
 <pre>{
-  "owner": {
-    "id": 1,
-    "name": "Phil Schanely",
-    "email": philschanely@example.com"
-  },
+	"id": 1,
   "description": "Finish homework",
   "dueDate": "2017-12-01",
   "category": {
@@ -236,7 +228,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<h4>Sorting</h4>
 	        <p>Results are always sorted by `dueDate` field.</p>
 					<h4>Return value</h4>
-					<p>Returns a list of all tasks that match any filtering criterion provided.</p>
+					<p>Returns a list of all tasks that match any filtering criterion provided. `owner` field is omitted.</p>
 	      </td>
 	    </tr>
 
