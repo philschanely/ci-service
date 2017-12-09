@@ -11,8 +11,17 @@ class Auth_User extends CI_Controller {
 
     public function index($_key='all')
     {
+        $auth = (object) array(
+            'authenticated' => false,
+            'user' => NULL
+        );
         $result = $this->user_model->route($_key);
-        echo json_encode($result);
+        if (count($result->users) > 0) {
+            $auth->authenticated = true;
+            $auth->user = $result->users[0];
+            unset($auth->user->password);
+        }
+        echo json_encode($auth);
     }
 
 }

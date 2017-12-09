@@ -31,7 +31,8 @@ class User_model extends CI_Model {
         $this->properties = array(
             'id',
             'name',
-            'email'
+            'email',
+            'password'
         );
         $this->belongs_to = array();
         $this->has_one = array();

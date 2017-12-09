@@ -5,8 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <head>
 	<meta charset="utf-8">
 	<title>CI-Service Test Page</title>
-	<link type="text/css" rel="stylesheet" href="../css/styles.bootswatch.css" />
-  <link type="text/css" rel="stylesheet" href="../css/styles.overrides.css" />
+	<link type="text/css" rel="stylesheet" href="https://bootswatch.com/3/cosmo/bootstrap.min.css" />
 </head>
 <body class="container-fluid">
 	<h1>Task Manager</h1>
@@ -335,9 +334,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <strong>GET a user given an email and encrypted password:</strong>
 <pre>$.ajax(api + "auth_user/", {
   type: "GET",
-  filter: {
-    "email": "philschanely@example.com",
-    "password": "encrypted_password_string*"
+  data: {
+    filter: {
+      "email": "philschanely@example.com",
+      "password": "encrypted_password_string"
+    }
   },
   success: function(data) {
     // Response script...
@@ -367,7 +368,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<dt>email<dt>
 						<dd>The email for the user trying to log in.</dd>
 						<dt>password</dt>
-						<dd>An encrypted password based on the password the user provided while trying to log in.</dd>
+						<dd>An encrypted password based on the password the user provided while trying to log in. Use the <code>md5(str)</code> library to convert a string <code>str</code> to an encrypted string.</dd>
 					</dl>
 					<h4>Sorting</h4>
 					<p>No sorting included</p>
