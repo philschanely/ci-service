@@ -1,0 +1,38 @@
+<div class="modal fade" id="edit-task" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <form class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title">Edit a Task</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <ul class="list-unstyled">
+          <li class="form-group">
+            <label>Details</label>
+            <textarea name="description">{{{description}}}</textarea>
+          </li>
+          <li class="form-group">
+            <label>Due date</label>
+            <input class="form-control" type="date" name="dueDate" value="{{dueDate}}" />
+          </li>
+          <li class="form-group">
+            <label>Category</label>
+            <input class="form-control" type="text" name="category" value="{{category}}" />
+          </li>
+          <li class="form-group">
+            <label>Type</label>
+            <input class="form-control" type="date" name="taskType" value="{{taskType}}" />
+          </li>
+        </ul>
+        <input type="hidden" name="owner" value="{{owner}}" />
+        <input type="hidden" name="id" value="{{id}}" />
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </form>
+  </div>
+</div>

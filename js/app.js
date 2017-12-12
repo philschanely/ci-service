@@ -16,9 +16,58 @@ var currentUser = {
 };
 var userLoggedIn = true;
 
+var categories = [];
+var taskTypes = [];
+
 
 // Function definitions
 // ----------------------------------
+
+function addCategory(e) {
+  e.preventDefault();
+  $('#edit-category').remove();
+  var newCategory = {
+    id: 0,
+    name: '',
+    owner: currentUser.id
+  };
+  var editCategoryHTML = tplModalEditCategory(newCategory);
+  $('body').append(editCategoryHTML);
+  $('#edit-category').modal('show');
+}
+
+function createCategory(data) {
+  $.ajax(api + "category/", {
+    type: "POST",
+    data: {
+      name: data.name,
+      owner: data.owner
+    },
+    success: function(data) {
+      data = $.parseJSON(data);
+      getCategories();
+      $("#edit-category").modal('hide');
+    }
+  });
+}
+
+function deleteCategory(e) {
+  e.preventDefault();
+  var categoryId = $(e.target).closest('.category').attr('data-id');
+  $.ajax(api + "category/" + categoryId, {
+    type: "DELETE",
+    success: function(data) {
+      getCategories();
+    }
+  });
+}
+
+function getTaskTypes() {
+  $.get(api + "task_type/", function(data) {
+    taskTypes = $.parseJSON(data);
+    console.log(taskTypes);
+  });
+}
 
 function preloadTemplates() {
   var tplCount = 0;
@@ -92,8 +141,8 @@ function getCategories() {
     },
     success: function(data) {
       data = $.parseJSON(data);
+      categories = data;
       var categoryListHTML = tplCategoryList(data);
-      console.log();
       $('#categories').html(categoryListHTML);
     }
   });
@@ -140,8 +189,24 @@ function initializeEventHandlers() {
     .on('click', '.link-logout', processLogout)
     .on('click', '.link-category', filterTasksByCategory)
     .on('click', '.link-all-tasks', getAllTasks)
+    .on('click', '.edit-category', editCategory)
+    .on('click', '.delete-category', deleteCategory)
+    .on('click', '.btn-add-category', addCategory)
     .on('submit', '.form-login', processLogin)
-    .on('submit', '.form-signup', processSignup);
+    .on('submit', '.form-signup', processSignup)
+    .on('submit', '.form-edit-category', saveCategory);
+}
+
+function editCategory(e) {
+  e.preventDefault();
+  $("#edit-category").remove();
+  var categoryId = $(e.target).closest('.category').attr('data-id');
+  $.get(api + "category/" + categoryId, function(data) {
+    data = $.parseJSON(data);
+    var editCategoryHTML = tplModalEditCategory(data);
+    $('body').append(editCategoryHTML);
+    $("#edit-category").modal('show');
+  });
 }
 
 function processLogin(e) {
@@ -222,6 +287,17 @@ function processSignup(e) {
   });
 }
 
+function saveCategory(e) {
+  e.preventDefault();
+  var formData = serializeData($(e.target));
+  var categoryID = formData.id;
+  if (categoryID > 0) {
+    updateCategory(formData);
+  } else {
+    createCategory(formData);
+  }
+}
+
 function serializeData($form) {
   if ($form) {
     var formData = $form.serializeArray();
@@ -257,6 +333,18 @@ function showSignupPage() {
   $('body').prepend(signupPageHTML);
 }
 
+function updateCategory(data) {
+  $.ajax(api + "category/" + data.id, {
+    type: "PUT",
+    data: data,
+    success: function(data) {
+      data = $.parseJSON(data);
+      getCategories();
+      $("#edit-category").modal('hide');
+    }
+  });
+}
+
 function validateEmail(email) {
   var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   return re.test(email);
@@ -269,7 +357,7 @@ function validateEmail(email) {
 $(function(){
 
   preloadTemplates();
-
+  getTaskTypes();
   initializeEventHandlers();
 
 });
